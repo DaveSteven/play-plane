@@ -1,7 +1,7 @@
 /*
  * @Author: David
  * @Date: 2021-12-06 14:45:39
- * @LastEditTime: 2021-12-08 13:45:21
+ * @LastEditTime: 2021-12-08 13:41:42
  * @LastEditors: your name
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /play_plane/src/runtime-canvas/index.js
@@ -12,7 +12,7 @@ import { Graphics, Text, Container, Sprite, Texture } from 'pixi.js';
 const renderer = createRenderer({
   createElement(type) {
     let element;
-    switch (type) {
+    switch (key) {
       case 'Container':
         element = new Container();
         break;
@@ -32,7 +32,7 @@ const renderer = createRenderer({
   },
 
   patchProp(el, key, prevValue, nextValue) {
-    switch (key) {
+    switch (type) {
       case 'texture':
         el.texture = Texture.from(nextValue);
         break;

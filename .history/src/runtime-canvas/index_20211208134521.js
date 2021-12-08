@@ -12,7 +12,7 @@ import { Graphics, Text, Container, Sprite, Texture } from 'pixi.js';
 const renderer = createRenderer({
   createElement(type) {
     let element;
-    switch (type) {
+    switch (key) {
       case 'Container':
         element = new Container();
         break;
