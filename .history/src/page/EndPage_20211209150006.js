@@ -1,5 +1,5 @@
 import { defineComponent, h } from '@vue/runtime-core';
-import bgImage from '../../assets/start_page.jpg';
+import endImage from '../../assets/end_page.jpg';
 import startBtn from '../../assets/startBtn.png';
 
 export default defineComponent({
@@ -13,7 +13,7 @@ export default defineComponent({
   },
   render(ctx) {
     return h('Container', [
-      h('Sprite', { texture: bgImage }),
+      h('Sprite', { texture: endImage }),
       h('Sprite', {
         texture: startBtn,
         x: 227,

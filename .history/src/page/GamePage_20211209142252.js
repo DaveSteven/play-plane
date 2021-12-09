@@ -1,3 +1,11 @@
+/*
+ * @Author: David
+ * @Date: 2021-12-08 11:02:47
+ * @LastEditTime: 2021-12-09 14:22:47
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /play_plane/src/page/GamePage.js
+ */
 import { defineComponent, h, reactive } from '@vue/runtime-core';
 import EnemyPlane from '../component/EnemyPlane';
 import Map from '../component/Map';
@@ -6,8 +14,8 @@ import { game } from '../Game';
 import { hitTestObject } from '../utils';
 
 export default defineComponent({
-  setup(props, ctx) {
-    let planeInfo = useCreatePlane();
+  setup() {
+    const planeInfo = useCreatePlane();
     const enemyPlanes = useCreateEnemyPlanes();
 
     game.ticker.add(() => {
@@ -17,8 +25,7 @@ export default defineComponent({
 
       enemyPlanes.forEach((enemyInfo) => {
         if (hitTestObject(enemyInfo, planeInfo)) {
-          planeInfo = useCreatePlane;
-          ctx.emit('changePage', 'EndPage');
+          console.log('游戏结束');
         }
       });
     });
@@ -58,7 +65,7 @@ function useCreateEnemyPlanes() {
 }
 
 function useCreatePlane() {
-  const planeInfo = reactive({ x: 150, y: 700, width: 258, height: 364 });
+  const planeInfo = reactive({ x: 150, y: 150, width: 258, height: 364 });
   const speed = 15;
   document.addEventListener('keydown', (e) => {
     switch (e.code) {
