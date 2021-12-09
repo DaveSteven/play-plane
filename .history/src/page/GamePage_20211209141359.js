@@ -1,7 +1,7 @@
 /*
  * @Author: David
  * @Date: 2021-12-08 11:02:47
- * @LastEditTime: 2021-12-09 14:15:44
+ * @LastEditTime: 2021-12-09 14:13:59
  * @LastEditors: your name
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /play_plane/src/page/GamePage.js
@@ -16,7 +16,7 @@ import { hitTestObject } from '../utils';
 export default defineComponent({
   setup() {
     const planeInfo = useCreatePlane();
-    const enemyPlanes = useCreateEnemyPlane(planeInfo);
+    const enemyPlanes = useEnemyPlane();
     return {
       planeInfo,
       enemyPlanes,
@@ -38,7 +38,7 @@ export default defineComponent({
     ]);
   },
 });
-function useCreateEnemyPlane(planeInfo) {
+function useEnemyPlane(planeInfo) {
   const enemyPlanes = reactive([
     {
       x: 50,

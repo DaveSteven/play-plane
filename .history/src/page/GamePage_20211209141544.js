@@ -16,7 +16,7 @@ import { hitTestObject } from '../utils';
 export default defineComponent({
   setup() {
     const planeInfo = useCreatePlane();
-    const enemyPlanes = useCreateEnemyPlane(planeInfo);
+    const enemyPlanes = useEnemyPlane(planeInfo);
     return {
       planeInfo,
       enemyPlanes,
@@ -38,7 +38,7 @@ export default defineComponent({
     ]);
   },
 });
-function useCreateEnemyPlane(planeInfo) {
+function useEnemyPlane(planeInfo) {
   const enemyPlanes = reactive([
     {
       x: 50,

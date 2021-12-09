@@ -1,7 +1,7 @@
 /*
  * @Author: David
  * @Date: 2021-12-08 11:02:47
- * @LastEditTime: 2021-12-09 14:15:44
+ * @LastEditTime: 2021-12-09 13:48:19
  * @LastEditors: your name
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /play_plane/src/page/GamePage.js
@@ -11,24 +11,31 @@ import EnemyPlane from '../component/EnemyPlane';
 import Map from '../component/Map';
 import Plane from '../component/Plane';
 import { game } from '../Game';
-import { hitTestObject } from '../utils';
 
 export default defineComponent({
   setup() {
-    const planeInfo = useCreatePlane();
-    const enemyPlanes = useCreateEnemyPlane(planeInfo);
+    const planeInfo = userCreatePlane();
+    const enemyPlanes = reactive([
+      {
+        x: 50,
+        y: 0,
+      },
+    ]);
+
     return {
       planeInfo,
       enemyPlanes,
     };
   },
   render(ctx) {
+    ctx.enemyPlanes.map((enemyPlaneInfo) => {
+      game.ticker.add(() => {
+        enemyPlaneInfo.y++;
+      });
+    });
     const useCreateEnemyPlane = () => {
-      return ctx.enemyPlanes.map((enemyInfo) => {
-        return h(EnemyPlane, {
-          x: enemyInfo.x,
-          y: enemyInfo.y,
-        });
+      return ctx.enemyPlanes.map((enemyPlaneInfo) => {
+        return h(EnemyPlane, { x: enemyPlaneInfo.x, y: enemyPlaneInfo.y });
       });
     };
     return h('Container', [
@@ -38,32 +45,8 @@ export default defineComponent({
     ]);
   },
 });
-function useCreateEnemyPlane(planeInfo) {
-  const enemyPlanes = reactive([
-    {
-      x: 50,
-      y: 0,
-      width: 308,
-      height: 207,
-    },
-  ]);
-
-  game.ticker.add(() => {
-    enemyPlanes.forEach((enemyPlaneInfo) => {
-      enemyPlaneInfo.y++;
-    });
-
-    enemyPlanes.forEach((enemyInfo) => {
-      if (hitTestObject(enemyInfo, planeInfo)) {
-        console.log('游戏结束');
-      }
-    });
-  });
-  return enemyPlanes;
-}
-
-function useCreatePlane() {
-  const planeInfo = reactive({ x: 150, y: 150, width: 258, height: 364 });
+function userCreatePlane() {
+  const planeInfo = reactive({ x: 150, y: 150 });
   const speed = 15;
   document.addEventListener('keydown', (e) => {
     switch (e.code) {
