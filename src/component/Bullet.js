@@ -1,15 +1,10 @@
 import { defineComponent, h, toRefs } from '@vue/runtime-core';
-import planeImg from '../../assets/plane.png';
+import bulletImage from '../../assets/bullet.png';
 
 export default defineComponent({
   props: ['x', 'y'],
-  setup(props, { emit }) {
+  setup(props, ctx) {
     const { x, y } = toRefs(props);
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        emit('attack', { x: x.value + 100, y: y.value });
-      }
-    });
     return {
       x,
       y,
@@ -19,7 +14,7 @@ export default defineComponent({
     return h(
       'Container',
       h('Sprite', {
-        texture: planeImg,
+        texture: bulletImage,
         x: ctx.x,
         y: ctx.y,
       })
